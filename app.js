@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const _ = require('lodash');
 
 
 // Var declirations
@@ -21,6 +22,7 @@ app.use(express.static("public"));
 // Render all the pages
 
 app.get("/", (req,res) =>{
+
   res.render("home", {homeContent: homeStartingContent, posts: postArr});
 });
 
@@ -34,6 +36,19 @@ app.get("/contact", (req,res) =>{
 
 app.get("/compose", (req,res) =>{
   res.render("compose");
+});
+
+app.get("/posts/:thisPost",(req,res) =>{
+  let urlName = _.lowerCase(req.params.thisPost);
+  postArr.forEach((post) =>{
+    let enteredName = _.lowerCase(post.title);
+    if (urlName === enteredName) {
+      res.render("post", {urlName : post.title, thisPost: post.thePost})
+    }else{
+      console.log("No match");
+    }
+  });
+
 });
 
 app.post("/compose", (req,res) =>{
