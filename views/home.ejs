@@ -6,11 +6,10 @@
 
 <% posts.forEach((post) =>{%>
 <div class="container">
-  <h1 class="container"><%=post.title%> </h1>
-  <p><%=post.thePost.substr(0,99)%> ... <a href="/posts/<%=post.title%>">Read More</a></p>
+  <h2 class="container"><%=post.title%> </h2>
+  <p><%=post.post.substr(0,99)%> ... <a href="/posts/<%=post._id%>">Read More</a></p>
 </div>
 <%}); %>
-
 
 
 <%- include('partials/footer'); -%>
